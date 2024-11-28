@@ -1,36 +1,157 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+Here's your "Savynite" introduction with added emojis for better engagement and visual appeal:
 
-## Getting Started
+---
 
-First, run the development server:
+# 🚀 Introducing Savynite - One Stop Finance App 💰
+
+Welcome to **Savynite**, your comprehensive finance management app designed with **React Native** and **TypeScript**. Savynite provides users with intuitive tools to track their expenses, set financial goals, and gain actionable insights.
+
+## Features 🌟
+
+- **Budget Management** 📊: Create, edit, and track budgets for various categories.
+- **Expense Insights** 💸: Understand your spending patterns with detailed analytics.
+- **Financial Goals** 🎯: Set and monitor progress toward achieving your financial aspirations.
+- **Multi-Account Support** 💳: Manage multiple bank accounts in one place.
+- **Secure and Private** 🔐: State-of-the-art encryption ensures your data is protected.
+- **Dark-Light Theme** 🌙🌞: Toggle themes for a personalized user experience.
+
+---
+
+## Getting Started ⚡
+
+### Prerequisites
+
+- Install **Node.js** ([Download Node.js](https://nodejs.org/)).
+- Install **React Native CLI** ([React Native Docs](https://reactnative.dev/docs/environment-setup)).
+- Install **Expo CLI** (if using Expo).
+- A code editor like **VS Code** or **WebStorm**.
+
+### Installation 🛠️
+
+Clone the repository and navigate to the project directory:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/Dhaval-sojitra147/Savynite.git
+cd savynite
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Install dependencies:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm install
+# or
+yarn install
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+Run the app on an emulator or physical device:
 
-## Learn More
+```bash
+npm run android
+# or
+npm run ios
+```
 
-To learn more about Next.js, take a look at the following resources:
+If you're using Expo:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+expo start
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## Code Highlights 🔍
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Theme Management 🎨
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Switch between light and dark themes dynamically using a context API and hooks:
+
+```typescript
+import React, { createContext, useState, useContext } from 'react';
+
+type ThemeContextType = {
+  isDarkMode: boolean;
+  toggleTheme: () => void;
+};
+
+const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
+
+export const ThemeProvider: React.FC = ({ children }) => {
+  const [isDarkMode, setIsDarkMode] = useState(false);
+
+  const toggleTheme = () => {
+    setIsDarkMode((prev) => !prev);
+  };
+
+  return (
+    <ThemeContext.Provider value={{ isDarkMode, toggleTheme }}>
+      {children}
+    </ThemeContext.Provider>
+  );
+};
+
+export const useTheme = () => {
+  const context = useContext(ThemeContext);
+  if (!context) throw new Error('useTheme must be used within ThemeProvider');
+  return context;
+};
+```
+
+### API Integration 🌐
+
+Fetch live financial data using the `axios` library:
+
+```typescript
+import axios from 'axios';
+
+export const fetchData = async (url: string) => {
+  try {
+    const response = await axios.get(url);
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching data:', error);
+    throw error;
+  }
+};
+```
+
+### Budget Tracking Logic 📉
+
+Calculate remaining budgets dynamically:
+
+```typescript
+export const calculateRemainingBudget = (
+  totalBudget: number,
+  expenses: number
+): number => {
+  return totalBudget - expenses;
+};
+```
+
+---
+
+## Contributions 💡
+
+We welcome contributions! To contribute:
+
+1. Fork the repository.
+2. Create a new branch (`git checkout -b feature/your-feature`).
+3. Commit your changes (`git commit -m "Added new feature"`).
+4. Push to the branch (`git push origin feature/your-feature`).
+5. Open a pull request.
+
+---
+
+## License 📜
+
+This project is licensed under the **MIT License**. See the LICENSE file for more details.
+
+---
+
+## 📞 Contact
+
+For queries, feel free to reach out:
+
+- 📧 Email: [dhaval.artonest@gmail.com](mailto:dhaval.artonest@gmail.com)
+- GitHub: [https://github.com/Dhaval-sojitra147](https://github.com/Dhaval-sojitra147)
+
+---
